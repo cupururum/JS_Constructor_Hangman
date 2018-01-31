@@ -1,0 +1,22 @@
+{
+  "name": "js_constructor_hangman",
+  "version": "1.0.0",
+  "description": "A hangman command-line game using constructor functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cupururum/JS_Constructor_Hangman.git"
+  },
+  "author": "Lera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cupururum/JS_Constructor_Hangman/issues"
+  },
+  "homepage": "https://github.com/cupururum/JS_Constructor_Hangman#readme",
+  "dependencies": {
+    "inquirer": "^5.0.1"
+  }
+}
