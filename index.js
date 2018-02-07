@@ -15,7 +15,7 @@ initiate()
 askUserCheckGuess()
 
 function initiate() {
-  numberOfTriesRemaining = 11
+  numberOfTriesRemaining = 10
   usersGuessesLetters = []
   word = words[Math.floor(Math.random() * words.length)]
   SecretWord = new Word(word)
@@ -61,7 +61,7 @@ function askUserCheckGuess() {
       }
     ]).then(function(answer){
         userGuess = answer.user_input.toLowerCase()
-          if (alphabet.indexOf(userGuess) > -1) { 
+          if (alphabet.indexOf(userGuess) > -1) {
             if (usersGuessesLetters.indexOf(userGuess) > -1) {
               console.log("You have already tried this letter. Try again!")
               SecretWord.returnAndShowString()
@@ -70,27 +70,16 @@ function askUserCheckGuess() {
               usersGuessesLetters.push(userGuess)
               SecretWord.checkCharacter(userGuess)
               SecretWord.returnAndShowString()
-              moreGuessesLeft = 0
-              SecretWord.wordArray.forEach(function(letterObject){
-                if (letterObject.isGuessed) {
-                  //correctGuesses++
-                } else {
-                  return moreGuessesLeft++
-                }
-              })
-
-              if (moreGuessesLeft > 0) {
+              if (SecretWord.word.indexOf(userGuess) > -1) {
+                findHowManyLettersLeftToGuess()
+              } else {
                 numberOfTriesRemaining--
                 askUserCheckGuess()
-              } else {
-                console.log("You win!")
-                continueGame()
               }
-
             }
 
           } else {
-            console.log("Invalid input! Choose from alphabet. Try again!")
+            console.log("Invalid input! Choose one letter and/or from alphabet. Try again!")
             SecretWord.returnAndShowString()
             askUserCheckGuess()
           }
@@ -98,5 +87,23 @@ function askUserCheckGuess() {
   } else {
     console.log("You lost!")
     continueGame()
+  }
+}
+
+function findHowManyLettersLeftToGuess() {
+  moreGuessesLeft = 0
+  SecretWord.wordArray.forEach(function(letterObject){
+    if (letterObject.isGuessed) {
+      //correctGuesses++
+    } else {
+      return moreGuessesLeft++
+    }
+  })
+
+  if (moreGuessesLeft === 0) {
+    console.log("You win!")
+    continueGame()
+  } else {
+    askUserCheckGuess()
   }
 }
